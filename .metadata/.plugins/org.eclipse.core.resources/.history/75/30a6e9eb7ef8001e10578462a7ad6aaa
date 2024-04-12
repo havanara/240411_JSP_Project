@@ -1,0 +1,10 @@
+package orm;
+
+import org.apache.ibatis.session.SqlSessionFactory;
+
+public class DatabaseBuilder {
+
+	private static SqlSessionFactory factory;
+	//final은 대문자로 작성해야함
+	private static final String CONFIG = "orm/mybatisConfig.xml";
+}

@@ -1,0 +1,18 @@
+package repository;
+
+import org.slf4j.LoggerFactory;
+
+import domain.BoardVO;
+
+public class BoardDAOImpl implements BoardDAO {
+
+	private static final Logger log = LoggerFactory.getLogger(BoardDAOImpl.class);
+	// DB 설정 -> mybatis lib 사용하여 DB 구성
+	
+	@Override
+	public int insert(BoardVO bvo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}
