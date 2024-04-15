@@ -1,0 +1,37 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Member modify Page</h1>
+	
+	<table border="1">
+		<tr>
+			<th>id</th>
+			<td>${mvo.id }"</td>
+		</tr>
+		<tr>
+			<th>pwd</th>
+			<td>${mvo.pwd }"</td>
+		</tr>
+		<tr>
+			<th>email</th>
+			<td>${mvo.email }"</td>
+		</tr>
+		<tr>
+			<th>age</th>
+			<td>${mvo.age }"</td>
+		</tr>
+		<tr>
+			<th>phone</th>
+			<td>${mvo.phone }"</td>
+		</tr>
+	</table>
+	<a href="/memb/detail?id=${mvo.id }"><button>detail</button></a>
+	<a href="/memb/list"><button>list</button></a>
+</body>
+</html>

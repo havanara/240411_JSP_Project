@@ -3,3 +3,5 @@ D:\nara\_jsp_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\160
 \jst_study\src\main\java
 D:\nara\_jsp_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2544487318.index
 \jst_study\src\main\java
+D:\nara\_jsp_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2181031898.index
+\jst_study\src\main\java

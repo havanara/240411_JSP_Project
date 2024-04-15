@@ -53,7 +53,7 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public int update(BoardVO bvo) {
 		log.info("update dao in!");
-		int isOK = sql.insert("BoardMapper.update", bvo);
+		int isOK = sql.update("BoardMapper.update", bvo);
 
 		// insert, update, delete와 같이 DB가 변경되는 구문은
 		// 반드시!!! commit 필요

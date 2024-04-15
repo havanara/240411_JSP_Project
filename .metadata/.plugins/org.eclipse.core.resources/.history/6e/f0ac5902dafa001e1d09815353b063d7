@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="MemberMapper"></mapper>
+  
+  <insert id="add" parameterType="domain.MemberVO">
+  <!-- String id, String pwd, String email, int age, String phone -->
+  	insert into member(id,pwd,email,age,phone) values(#{id},#{pwd},#{email},#{age},#{phone})
+  </insert>

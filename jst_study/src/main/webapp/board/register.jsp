@@ -12,7 +12,7 @@
 	<!-- action -> 내가 보낼 위치 -->
 	<form action="/brd/insert" method="post">
 		title : <input type="text" name="title"> <br>
-		writer : <input type="text" name="writer"> <br>
+		writer : <input type="text" name="writer" value="${ses.id }" readonly="readonly"> <br>
 		content :  <textarea rows="10" cols="30" name="content"></textarea> <br>
 		<button type="submit">전송</button>
 	</form>

@@ -138,7 +138,8 @@ public class BoardController extends HttpServlet {
 			try {
 				int bno = Integer.parseInt(request.getParameter("bno"));
 				int isOK = bsv.getRemove(bno);
-				log.info("remove bvo >>>>> {}", isOK);
+				log.info("delete "+(isOK>0? "성공":"실패 -> " )+ isOK);
+				destPage = "list"; //내부 list 케이스를 한번 타고 실행
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

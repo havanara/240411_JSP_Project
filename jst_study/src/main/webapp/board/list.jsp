@@ -27,6 +27,7 @@
 		</tr>
 	</c:forEach>
 	</table>
+	<a href="../index.jsp"><button type="button">index</button></a>
 	
 	
 </body>

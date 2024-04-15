@@ -1,0 +1,120 @@
+package controller;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import domain.MemberVO;
+import service.MemberService;
+import service.MemberServiceImpl;
+
+/**
+ * Servlet implementation class MemberController
+ */
+@WebServlet("/memb/*")
+public class MemberController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	
+	//로그객체
+	private static final Logger log = LoggerFactory.getLogger(MemberServiceImpl.class);
+	
+	
+	//rdp 객체 requestDispatcher : 요청 결과에 대한 응답 데이터를 jsp로 전송하는 역할
+	private RequestDispatcher rdp;
+	
+	//destPage : 목적지 주소
+	private String destPage;
+	
+	//isOK
+	private int isOK;
+	
+	//service
+	private MemberService msv; //service -> interface
+	
+	public MemberController() {
+		msv = new MemberServiceImpl(); //service -> class implement MemberService
+	}
+
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//통합처리
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
+		String uri = request.getRequestURI();
+		log.info(uri);
+		
+		String path = uri.substring(uri.lastIndexOf("/")+1);
+		log.info(path);
+		
+		switch (path) {
+		case "join" :
+			//index의 join 버튼 클릭 시
+			destPage = "/member/join.jsp";
+			break;
+		case "register" :
+			try {
+				//jsp에서 보낸 파라미터 값 받기
+				String id = request.getParameter("id");
+				String pwd = request.getParameter("pwd");
+				String email = request.getParameter("email");
+				int age = Integer.parseInt(request.getParameter("age"));
+				String phone = request.getParameter("phone");
+				
+				MemberVO mvo = new MemberVO(id,pwd,email,age,phone);
+				log.info(" join mvo >>>>> {} ", mvo);
+				isOK = msv.register(mvo);
+				log.info("join >> {} ", (isOK > 0)?"Ok":"Fail");
+				destPage = "/index.jsp";
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "login" :
+			try {
+				//jsp에서 보내온 id,pwd를 객체로 받기
+				//id,pwd를 객체로 만들어서 db로 전송(같은 id/pwd를 갖는 객체가 있는지 확인)
+				//같은 값을 갖는 객체가 있다면 로그인(= 세션 객체에 값을 저장)
+				//session : 모든 jsp에서 공유되는 객체 / 브라우저가 종료되면 삭제
+				String id = request.getParameter("id");
+				String pwd = request.getParameter("pwd");
+				
+				MemberVO mvo = new MemberVO(id,pwd);
+				
+				log.info("login >>>>> {} ", mvo);
+				
+				//id와 pwd가 일치하는 객체 전부를 리턴
+				MemberVO loginMvo = msv.login(mvo);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		default:
+			break;
+		}
+		//목적지 이동 설정
+		rdp = request.getRequestDispatcher(destPage); //이동객체 설정
+		rdp.forward(request, response); //이동
+	}
+
+	//서비스 처리해서 매개변수로 전달(서비스에서 통합처리)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//method get으로 오는 처리
+		service(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//method post로 오는 처리
+		service(request, response);
+	}
+
+}
