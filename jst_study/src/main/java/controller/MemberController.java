@@ -142,6 +142,7 @@ public class MemberController extends HttpServlet {
 			break;
 		case "modify" :
 			try {
+				//페이지 이동만
 				String id = request.getParameter("id");
 				log.info(id);
 				MemberVO mvo = msv.getDetail(id);
@@ -154,27 +155,48 @@ public class MemberController extends HttpServlet {
 			break;
 		case "update" : 
 			try {
+				//실제 데이터 수정
 				String id = request.getParameter("id");
 				String pwd = request.getParameter("pwd");
 				String email = request.getParameter("email");
 				int age = Integer.parseInt(request.getParameter("age"));
 				String phone = request.getParameter("phone");
+				//regdate,lastlogin은 disabled처리해서 안감
 
 				MemberVO mvo = new MemberVO(id, pwd, email, age, phone);
 				int isOK = msv.update(mvo);
 				log.info("update "+(isOK>0? "성공":"실패 -> " )+ isOK);
-				destPage = "list";
+				
+				if(isOK>0) {
+					request.setAttribute("msg_update","ok");
+					
+					//업데이트 후 세션 끊기
+					HttpSession ses = request.getSession(); //로그인한 세션을 가져와
+					ses.invalidate(); //세션 끊기
+					destPage = "/index.jsp";
+				}else {
+					request.setAttribute("msg_update", "fail");
+					destPage = "/member/modify.jsp";
+				}
+				//업데이트 후 세션 끊기
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			break;
-		case "remove" : 
+		case "delete" : 
 			try {
-				String id = request.getParameter("id");
-				log.info(id);
+				HttpSession ses = request.getSession(); //로그인 된 세션 호출
+				String id = ((MemberVO)ses.getAttribute("ses")).getId();
+
 				int isOK = msv.getRemove(id);
 				log.info("delete"+(isOK>0?" 성공":" 실패 -> ")+ isOK);
-				destPage = "list";
+				//여기서 삭제는 DB에서 삭제(세션이 지워지는거와 상관이 없음, 세션은 내가 직접 지워야됨)
+				//세션은 별도로 삭제 혹은 끊어야 함
+				if(isOK>0) {
+					request.setAttribute("msg_delete", "ok");
+					ses.invalidate(); //세션 끊기					
+				}
+				destPage = "/index.jsp";
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

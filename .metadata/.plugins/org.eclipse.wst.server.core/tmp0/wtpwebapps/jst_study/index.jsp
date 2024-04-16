@@ -47,6 +47,18 @@
 		if(msg_login === '-1'){
 			alert("로그인 정보가 일치하지 않습니다.");
 		}
+		
+		const msg_update = `<c:out value = "${msg_update}" />`;
+		console.log(msg_update);
+		if(msg_update === 'ok'){
+			alert("회원정보수정이 완료되었습니다. 다시 로그인하세요")
+		}
+		
+		const msg_delete = `<c:out value = "${msg_delete}" />`;
+		console.log(msg_delete);
+		if(msg_delete === 'ok'){
+			alert("회원 탈퇴가 완료되었습니다.")
+		}
 	</script>
 </body>
 </html>

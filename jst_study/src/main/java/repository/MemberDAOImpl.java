@@ -20,6 +20,7 @@ public class MemberDAOImpl implements MemberDAO {
 		sql = DatabaseBuilder.getFactory().openSession();
 	}
 
+	//namespace -> mapper의 이름
 	//namespace="MemberMapper"
 	//MemberMapper.id
 	
@@ -65,6 +66,7 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int update(MemberVO mvo) {
 		log.info("update dao in!");
+		//insert, update, delete는 commit이 없으면 성공은 하지만 반영이 안됨
 		int isOK = sql.update("MemberMapper.update", mvo);
 		if(isOK > 0) {
 			sql.commit();

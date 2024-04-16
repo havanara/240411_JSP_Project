@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +25,7 @@
 			</tr>
 			<tr>
 				<th>content</th>
-				<td><textarea rows="10" cols="30" name="content" ${bvo.content }></textarea> </td>
+				<td><textarea rows="10" cols="30" name="content" >${bvo.content }</textarea> </td>
 			</tr>
 			<tr>
 				<th>regdate</th>
@@ -37,7 +38,8 @@
 		</table>
 		<button type="submit">전송</button>
 	</form>
-	<a href="/brd/modify?bno=${bvo.bno }"><button>modify</button></a>
+
+	
 	<a href="/brd/list"><button>list</button></a>
 </body>
 </html>
