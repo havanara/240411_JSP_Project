@@ -14,7 +14,28 @@
 <div class="container-lg">
 	<h1>Board List Page</h1>
 	
-	<table class="table table-dark table-striped">
+	<!-- Search Line -->
+	<div>
+		<form action="/brd/list" method="get">
+			<div>
+				<select name="type">
+					<option ${ph.pgvo.type eq null ? 'selected':'' }>Choose...</option>
+					<!-- selected 처리하여 검색한 값이 날아가지 않음 -->
+					<option value="t" ${ph.pgvo.type eq 't' ? 'selected':'' }>title</option>
+					<option value="w" ${ph.pgvo.type eq 'w' ? 'selected':'' }>writer</option>
+					<option value="c" ${ph.pgvo.type eq 'c' ? 'selected':'' }>content</option>
+				</select>
+				
+				<input type="text" name="keyword" placeholder="Search" value="${ph.pgvo.keyword }">
+				<input type="hidden" name="pageNo" value="1">
+				<input type="hidden" name="qty" value="${ph.pgvo.qty }">
+				<button type="submit">Search</button>
+				<span>총 게시글 : ${ph.totalCount}개</span>
+			</div>
+		</form>
+	</div>
+	
+	<table class="table table-striped">
 		<tr>
 			<th>bno</th>
 			<th>title</th>
@@ -31,8 +52,25 @@
 		</tr>
 	</c:forEach>
 	</table>
-	<a href="../index.jsp"><button type="button" class="btn btn-info">index</button></a>
-</div>	
+	<a href="../index.jsp"><button type="button" class="btn btn-secondary">index</button></a>
 	
+	<!-- Paging Line -> ph -->
+	<div>
+		<!-- prev -->
+		<c:if test="${ph.prev }">
+		<a href="/brd/list?pageNo=${ph.startPage-1 }&qty=${ph.pgvo.qty}&type=${ph.pgvo.type}&keyword=${ph.pgvo.keyword}"> ≪ 이전 </a>
+		</c:if>
+		
+		<!-- paging -->
+		<c:forEach begin="${ph.startPage }" end="${ph.endPage }" var="i">
+		<a href="/brd/list?pageNo=${i }&qty=${ph.pgvo.qty}&type=${ph.pgvo.type}&keyword=${ph.pgvo.keyword}">${i }</a>
+		</c:forEach>
+		
+		<!-- next -->
+		<c:if test="${ph.next }">
+		<a href="/brd/list?pageNo=${ph.endPage+1 }&qty=${ph.pgvo.qty}&type=${ph.pgvo.type}&keyword=${ph.pgvo.keyword}"> 다음 ≫ </a>
+		</c:if>
+	</div>
+</div>	
 </body>
 </html>

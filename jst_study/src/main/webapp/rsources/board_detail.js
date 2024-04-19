@@ -60,8 +60,10 @@ function spredCommentList(result){ //result = 댓글 리스트
         html += `<div>${result[i].cno}, ${result[i].bno}, ${result[i].writer}, ${result[i].regdate}</div>`;
         html += `<div>`;
         html += `<input type="text" class="cmtText" value="${result[i].content}">`;
-        html += `<button type="button" data-cno=${result[i].cno} class="cmtModBtn">수정</button>`;
-        html += `<button type="button" data-cno=${result[i].cno} class="cmtDelBtn">삭제</button><br>`;
+		if(id === result[i].writer){
+	        html += `<button type="button" data-cno=${result[i].cno} class="cmtModBtn">수정</button>`;
+	        html += `<button type="button" data-cno=${result[i].cno} class="cmtDelBtn">삭제</button><br>`;			
+		}
         html += `</div></div><hr>`;
         div.innerHTML += html; //각 댓글을 누적하여 담기
     }

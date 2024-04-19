@@ -13,17 +13,50 @@
   <insert id="add" parameterType="domain.BoardVO">
   	insert into board(title,writer,content) values(#{title},#{writer},#{content})
   </insert>
+  
+  <!-- PagingVO에 있는getPageStart -> get빼고 P소문자로 하여 pageStart -->
   <select id="list" resultType="domain.BoardVO">
-  	select * from board order by bno desc
+  	select * from board
+  	<include refid="search"></include> <!-- sql id=search 구문을 여기에 넣어줄거야 -->
+  	order by bno desc limit #{pageStart}, #{qty}
   </select>
+  
   <select id="detail" parameterType="int" resultType="domain.BoardVO">
   	select * from board where bno = #{bno}
   </select>
+  
   <select id="update" parameterType="domain.BoardVO">
   	update board set title=#{title}, content=#{content}, moddate=now() where bno=#{bno}
   </select>
+  
   <select id="delete" parameterType="domain.BoardVO">
   	delete from board where bno=#{bno}
   </select>
+  
+  <select id="total" resultType="int">
+  	select count(bno) from board
+  	<include refid="search"></include>
+  </select>
+  
+  <sql id="search">
+  	<if test="type != null">
+  		<trim prefix="where (" suffix=")">
+  			<choose>
+  				<when test="type=='t'.toString()">
+	  				<!-- concat 함수 텍스트 이어붙이기 -->
+	  				<!-- writer like '%t%' 를 인식하지 못함 -->
+  					title like concat('%', #{keyword}, '%')
+  				</when>
+  				<when test="type=='c'.toString()">
+  					content like concat('%', #{keyword}, '%')
+  				</when>
+  				<when test="type=='w'.toString()">
+  					writer like concat('%', #{keyword}, '%')
+  				</when>
+  			</choose>
+  		</trim>
+  	</if>
+  </sql>
+  
   </mapper>
   

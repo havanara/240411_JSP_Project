@@ -71,7 +71,9 @@
 	
 	<script type="text/javascript">
 		const bnoVal = `<c:out value="${bvo.bno}" />`;
+		const id = `<c:out value="${ses.id}" />`;
 		console.log(bnoVal);
+		console.log(id);
 	</script>
 	
 	<script type="text/javascript" src="/rsources/board_detail.js"></script>
