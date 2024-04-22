@@ -7,6 +7,8 @@ public class BoardVO {
 	private String content;
 	private String regdate;
 	private String moddate;
+	private String imageFile;
+	private int readCount;
 	
 	public BoardVO() {}
 	
@@ -28,10 +30,13 @@ public class BoardVO {
 		this.title = title;
 		this.content = content;
 	}
-	public BoardVO(int bno, String title, String writer, String content, String regdate, String moddate) {
+	public BoardVO(int bno, String title, String writer, String content,
+			String regdate, String moddate, String imageFile, int readCount) {
 		//detail : bno, title, writer, content, regdate, moddate
 		this(bno,title,writer,content,regdate);
 		this.moddate = moddate;
+		this.imageFile = imageFile;
+		this.readCount = readCount;
 	}
 	
 	public int getBno() {
@@ -82,13 +87,26 @@ public class BoardVO {
 		this.moddate = moddate;
 	}
 
+	public String getImageFile() {
+		return imageFile;
+	}
+
+	public void setImageFile(String imageFile) {
+		this.imageFile = imageFile;
+	}
+
+	public int getReadCount() {
+		return readCount;
+	}
+
+	public void setReadCount(int readCount) {
+		this.readCount = readCount;
+	}
+
 	@Override
 	public String toString() {
 		return "BoardVO [bno=" + bno + ", title=" + title + ", writer=" + writer + ", content=" + content + ", regdate="
-				+ regdate + ", moddate=" + moddate + "]";
+				+ regdate + ", moddate=" + moddate + ", imageFile=" + imageFile + ", readCount=" + readCount + "]";
 	}
-	
-	
-	
-	
+
 }

@@ -10,10 +10,13 @@
 	<h1>Board Register Page</h1>
 	
 	<!-- action -> 내가 보낼 위치 -->
-	<form action="/brd/insert" method="post">
+	<!-- enctype="multipart/form-data" : 이미지 파일을 가져갈 때 사용하는 타입 -->
+	<!-- 파일 : 종류/확장자 image/jpg, image/png ... -->
+	<form action="/brd/insert" method="post" enctype="multipart/form-data">
 		title : <input type="text" name="title"> <br>
 		writer : <input type="text" name="writer" value="${ses.id }" readonly="readonly"> <br>
-		content :  <textarea rows="10" cols="30" name="content"></textarea> <br>
+		content :  <br> <textarea rows="10" cols="30" name="content"></textarea> <br>
+		첨부파일 : <input type="file" name="imageFile" accept="image/png, image/jpg, image/gif, image/jpeg"> <br>
 		<button type="submit">전송</button>
 	</form>
 </body>

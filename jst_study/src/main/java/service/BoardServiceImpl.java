@@ -44,7 +44,10 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int getRemove(int bno) {
-		log.info("remove service in!");
+		//게시글을 지우기 전에 댓글을 삭제하고 글 지우기
+		CommentServiceImpl csv = new CommentServiceImpl();
+		int isOK = csv.removeAll(bno);
+		log.info("comment removeAll >> {}", isOK);
 		return bdao.delete(bno);
 	}
 
@@ -53,4 +56,10 @@ public class BoardServiceImpl implements BoardService {
 		log.info("total service in!");
 		return bdao.getTotal(pgvo);
 	}
+
+	@Override
+	public String getFileName(int bno) {
+		return bdao.getFileName(bno);
+	}
+
 }

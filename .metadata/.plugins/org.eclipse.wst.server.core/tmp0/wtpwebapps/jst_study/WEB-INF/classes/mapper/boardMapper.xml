@@ -11,7 +11,8 @@
   <!-- 실제 SQL 구문이 들어감 -->
   <!-- #{}, 세미클론 찍지 않음 -->
   <insert id="add" parameterType="domain.BoardVO">
-  	insert into board(title,writer,content) values(#{title},#{writer},#{content})
+  	insert into board(title, writer, content, imageFile)
+  	values(#{title}, #{writer}, #{content}, #{imageFile})
   </insert>
   
   <!-- PagingVO에 있는getPageStart -> get빼고 P소문자로 하여 pageStart -->
@@ -25,9 +26,10 @@
   	select * from board where bno = #{bno}
   </select>
   
-  <select id="update" parameterType="domain.BoardVO">
-  	update board set title=#{title}, content=#{content}, moddate=now() where bno=#{bno}
-  </select>
+  <update id="update" parameterType="domain.BoardVO">
+  	update board set title=#{title}, content=#{content},
+  	moddate=now(), imageFile=#{imageFile} where bno=#{bno}
+  </update>
   
   <select id="delete" parameterType="domain.BoardVO">
   	delete from board where bno=#{bno}
@@ -36,6 +38,10 @@
   <select id="total" resultType="int">
   	select count(bno) from board
   	<include refid="search"></include>
+  </select>
+  
+  <select id="getFileName" resultType="String">
+  	select imageFile from board where bno = #{bno}
   </select>
   
   <sql id="search">

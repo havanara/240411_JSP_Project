@@ -19,4 +19,6 @@ public interface BoardService {
 
 	int getTotal(PagingVO pgvo);
 
+	String getFileName(int bno);
+
 }

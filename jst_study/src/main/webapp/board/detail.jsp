@@ -10,6 +10,8 @@
 <body>
 	<h1>Board detail Page</h1>
 	
+	<img alt="" src="/_fileUpload/_th_${bvo.imageFile }">
+	
 	<table border="1">
 		<tr>
 			<th>bno</th>
@@ -36,8 +38,8 @@
 			<td>${bvo.moddate }</td>
 		</tr>
 		<tr>
-			<th>content</th>
-			<td>${bvo.content }</td>
+			<th>readCount</th>
+			<td>${bvo.readCount }</td>
 		</tr>
 	</table>
 	<c:if test="${bvo.writer == ses.id }">
@@ -52,7 +54,7 @@
 		comment line <br>
 		<input type="text" id="cmtWriter" value="${ses.id }" readonly="readonly"> <br>
 		<input type="text" id="cmtText" placeholder="Add Comment..."> <br>
-		<button type="button" id="cmtAddBtn">comment post</button>	
+		<button type="button" id="cmtAddBtn">등록</button>
 	</div> <br>
 	<hr>
 	
@@ -82,5 +84,6 @@
 	<script type="text/javascript">
     	printCommentList(bnoVal);
 	</script>
+	
 </body>
 </html>

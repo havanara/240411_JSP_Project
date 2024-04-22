@@ -41,14 +41,17 @@
 			<th>title</th>
 			<th>writer</th>
 			<th>regdate</th>
+			<th>readCount</th>
 		</tr>
 		<!-- DB에서 가져온 리스트를 c:forEach를 통해 반복 출력 -->
 	<c:forEach items="${list }" var="bvo">
 		<tr>
 			<td>${bvo.bno }</td>
-			<td><a href="/brd/detail?bno=${bvo.bno }">${bvo.title }</a></td>
+			<td><a href="/brd/detail?bno=${bvo.bno }"><img alt="" src="/_fileUpload/_th_${bvo.imageFile }">
+			${bvo.title }</a></td>
 			<td>${bvo.writer }</td>
 			<td>${bvo.regdate }</td>
+			<td>${bvo.readCount }</td>
 		</tr>
 	</c:forEach>
 	</table>
