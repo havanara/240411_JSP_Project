@@ -53,3 +53,18 @@
 ![검색2(작성자)](https://github.com/havanara/240411_JSP_Project/assets/166004719/094b6970-49ed-4873-b6f4-1c44bc05d4d6)
 
 ![검색3(내용)](https://github.com/havanara/240411_JSP_Project/assets/166004719/34e02648-1ad6-4661-91db-8e748acfd64c)
+
+---
+
+#### 📅 240422
+* [x] board(게시판) 게시글 사진 업로드
+* [x] board(게시판) 게시글 삭제 시 사진, 댓글 DB 삭제
+* [x] board(게시판) 조회수
+
+---
+
+### 사진 업로드, 조회수
+
+![조회수1](https://github.com/havanara/240411_JSP_Project/assets/166004719/61c35aa6-0e78-45f1-879e-5eba42f9af2f)
+
+![조회수2](https://github.com/havanara/240411_JSP_Project/assets/166004719/894c24bc-9b18-4c47-a68d-7db99cac62d5)
