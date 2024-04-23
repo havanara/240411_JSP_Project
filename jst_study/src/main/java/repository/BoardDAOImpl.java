@@ -89,4 +89,13 @@ public class BoardDAOImpl implements BoardDAO {
 		return sql.selectOne("BoardMapper.getFileName", bno);
 	}
 
+	@Override
+	public int readCountUpdate(int bno) {
+		int isOK = sql.update("BoardMapper.read",bno);
+		if(isOK>0) {
+			sql.commit();
+		}
+		return isOK;
+	}
+
 }

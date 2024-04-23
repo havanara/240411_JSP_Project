@@ -21,4 +21,6 @@ public interface BoardService {
 
 	String getFileName(int bno);
 
+	int readCountUpdate(int bno);
+
 }

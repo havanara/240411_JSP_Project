@@ -44,6 +44,10 @@
   	select imageFile from board where bno = #{bno}
   </select>
   
+  <update id="read">
+  	update board set readCount = readCount+1 where bno = #{bno}
+  </update>
+  
   <sql id="search">
   	<if test="type != null">
   		<trim prefix="where (" suffix=")">

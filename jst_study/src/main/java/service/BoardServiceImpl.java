@@ -62,4 +62,10 @@ public class BoardServiceImpl implements BoardService {
 		return bdao.getFileName(bno);
 	}
 
+	@Override
+	public int readCountUpdate(int bno) {
+		// TODO Auto-generated method stub
+		return bdao.readCountUpdate(bno);
+	}
+
 }

@@ -104,7 +104,7 @@ public class BoardController extends HttpServlet {
 					case "content" : 
 						bvo.setContent(item.getString("UTF-8"));
 						break;
-					case "imageFile" : 
+					case "imageFile" :                                                                                                                                  
 						//이미지 파일 여부 체크
 						if(item.getSize() > 0) {
 							//파일 이름 추출
@@ -198,12 +198,13 @@ public class BoardController extends HttpServlet {
 		case "detail" : case "modify" :
 			try {
 				int bno = Integer.parseInt(request.getParameter("bno"));
+				if(path.equals("detail")) {
+					int isOK = bsv.readCountUpdate(bno);
+				}
 				BoardVO bvo = bsv.getDetail(bno);
 				log.info("detail bvo >>>>> {}", bvo);
 				request.setAttribute("bvo", bvo);
 				destPage = "/board/"+path+".jsp";
-				
-				int readCount = Integer.parseInt(request.getParameter("readCount"));
 
 			} catch (Exception e) {
 				e.printStackTrace();
